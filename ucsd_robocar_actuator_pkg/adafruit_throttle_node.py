@@ -14,9 +14,8 @@ class AdafruitThrottle(Node):
 
 
     def callback(self, data):
-        normalized_steering = data.data
-        angle_delta = normalized_steering * 90  # difference in degrees from the center 90 degrees
-        kit.servo[1].angle = 90 + angle_delta
+        normalized_throttle = data.data
+        kit.continuous_servo[2].throttle = normalized_throttle
 
 
 def main(args=None):
