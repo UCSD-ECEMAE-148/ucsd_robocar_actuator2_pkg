@@ -12,7 +12,7 @@ v = VESC_()
 class VescSteering(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.centroid_subscriber = self.create_subscription(Float32, STEERING_TOPIC_NAME, self.callback, 10)
+        self.steering_subscriber = self.create_subscription(Float32, STEERING_TOPIC_NAME, self.callback, 10)
 
 
     def callback(self, data):
