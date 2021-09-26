@@ -12,7 +12,7 @@ v = VESC_()
 class VescRPM(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.centroid_subscriber = self.create_subscription(Float32, RPM_REQUEST_TOPIC_NAME, self.callback, 10)
+        self.rpm_subscriber = self.create_subscription(Float32, RPM_REQUEST_TOPIC_NAME, self.callback, 10)
 
 
     def callback(self, data):
