@@ -10,6 +10,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name), glob('launch/*.launch.py')),
+        (os.path.join('share', package_name), glob('config/*.yaml'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -20,6 +22,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'adafruit_steering_node = ucsd_robocar_actuator_pkg.adafruit_steering_node:main',
+            'adafruit_throttle_node = ucsd_robocar_actuator_pkg.adafruit_throttle_node:main',
+            'vesc_rpm_node = ucsd_robocar_actuator_pkg.vesc_rpm_node:main',
+            'vesc_steering_node = ucsd_robocar_actuator_pkg.vesc_steering_node:main'
         ],
     },
 )
