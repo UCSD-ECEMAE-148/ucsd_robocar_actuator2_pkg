@@ -1,0 +1,27 @@
+import os
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+
+def generate_launch_description():
+    pkg = 'ucsd_robocar_actuator_pkg'
+    steering_node_name = 'vesc_steering_node.py'
+    throttle_node_name = 'vesc_rpm_node.py'
+
+    ld = LaunchDescription()
+
+    steering_node = Node(
+        package=pkg,
+        executable=steering_node_name,
+        output='screen'
+        )
+
+    throttle_node = Node(
+        package=pkg,
+        executable=throttle_node_name,
+        output='screen'
+        )
+
+    ld.add_action(sensor_node)
+    return ld
