@@ -4,7 +4,7 @@ from std_msgs.msg import Int32
 from vesc_client import VESC_
 
 NODE_NAME = 'vesc_rpm_node'
-RPM_REQUEST_TOPIC_NAME = 'vesc_rpm_request'
+RPM_REQUEST_TOPIC_NAME = '/vesc_rpm_request'
 RPM_ACTUAL_TOPIC_NAME = 'vesc_rpm_actual'
 
 v = VESC_()
