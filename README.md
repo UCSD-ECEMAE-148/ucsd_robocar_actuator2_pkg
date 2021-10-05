@@ -7,10 +7,10 @@
     - [adafruit_servokit](#adafruit_servokit)
     - [pyVesc](#pyVesc)
   - [**Nodes**](#nodes)
-    - [1. adafruit_steering_node](#adafruit_steering_node)
-    - [2. adafruit_throttle_node](#adafruit_throttle_node)
-    - [3. vesc_steering_node](#vesc_steering_node)
-    - [4. vesc_rpm_node](#vesc_rpm_node)
+    - [adafruit_steering_node](#adafruit_steering_node)
+    - [adafruit_throttle_node](#adafruit_throttle_node)
+    - [vesc_steering_node](#vesc_steering_node)
+    - [vesc_rpm_node](#vesc_rpm_node)
   - [**Topics**](#topics)
     - [steering](#steering)
     - [throttle](#throttle)
@@ -24,7 +24,7 @@
 
 </div>
 
-### **1. adafruit_steering_node**
+### **adafruit_steering_node**
 
 Associated file: **adafruit_steering_node.py**
 
@@ -38,7 +38,7 @@ module on **channel 1** for sending signals to the hardware.
 Plenty of information on how to use the adafruit_servokit libraries can be found <a href="https://learn.adafruit.com/16-channel-pwm-servo-driver/python-circuitpython" >here</a> and <a href="https://github.com/adafruit/Adafruit_CircuitPython_ServoKit" >here</a> 
 
 
-### **2. adafruit_throttle_node**
+### **adafruit_throttle_node**
 
 Associated file: **adafruit_throttle_node.py**
 
@@ -50,7 +50,7 @@ module on **channel 2** for sending signals to the hardware.
 
 This node is also responsible for reading and setting the throttle calibration values.
 
-### **3. vesc_steering_node**
+### **vesc_steering_node**
 
 Associated file: **vesc_steering_node.py**
 
@@ -63,7 +63,7 @@ module through usb serial communication to send steering commands.
 Plenty of information on how to use the vesc python libraries can be found <a href="https://pyvesc.readthedocs.io/en/latest/" >here</a> and <a href="https://github.com/LiamBindle/PyVESC" >here</a> 
 
 
-### **4. vesc_rpm_node**
+### **vesc_rpm_node**
 
 Associated file: **vesc_rpm_node.py**
 
