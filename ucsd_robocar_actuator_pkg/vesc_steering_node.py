@@ -6,7 +6,7 @@ import os.path
 from vesc_client import VESC_
 
 NODE_NAME = 'vesc_steering_node'
-STEERING_TOPIC_NAME = 'vesc_steering'
+STEERING_TOPIC_NAME = '/vesc_steering'
 
 
 v = VESC_()
