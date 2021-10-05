@@ -24,7 +24,7 @@
 
 </div>
 
-### **adafruit_steering_node**
+1. ### **adafruit_steering_node**
 
 Associated file: **adafruit_steering_node.py**
 
