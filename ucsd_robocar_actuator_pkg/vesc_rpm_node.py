@@ -1,24 +1,23 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import Int32
+from std_msgs.msg import Float32
 from vesc_client import VESC_
 
 NODE_NAME = 'vesc_rpm_node'
-RPM_REQUEST_TOPIC_NAME = '/vesc_rpm_request'
-RPM_ACTUAL_TOPIC_NAME = 'vesc_rpm_actual'
+TOPIC_NAME = '/throttle'
 
 v = VESC_()
 
 class VescRPM(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.rpm_subscriber = self.create_subscription(Float32, RPM_REQUEST_TOPIC_NAME, self.callback, 10)
-
+        self.rpm_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
+        self.max_rpm = 5000
 
     def callback(self, data):
-        rpm = data.data
+        throttle = data.data  #scaled from [-1:1], need to convert to RPM
+        rpm = int(self.max_rpm * throttle)
         v.send_rpm(rpm)
-        # v.get_rpm()
 
 
 def main(args=None):
