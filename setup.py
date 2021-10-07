@@ -4,11 +4,12 @@ from glob import glob
 
 
 package_name = 'ucsd_robocar_actuator2_pkg'
+submodule = str(package_name +"/vesc_submodule")
 
 setup(
     name=package_name,
     version='0.0.0',
-    packages=[package_name],
+    packages=[package_name, submodule],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
