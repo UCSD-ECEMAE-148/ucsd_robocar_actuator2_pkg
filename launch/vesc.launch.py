@@ -6,8 +6,8 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     pkg = 'ucsd_robocar_actuator2_pkg'
-    steering_node_name = 'vesc_steering_node.py'
-    throttle_node_name = 'vesc_rpm_node.py'
+    steering_node_name = 'vesc_steering_node'
+    throttle_node_name = 'vesc_rpm_node'
 
     ld = LaunchDescription()
 
