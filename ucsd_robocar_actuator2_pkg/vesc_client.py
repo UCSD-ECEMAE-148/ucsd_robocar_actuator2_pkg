@@ -42,7 +42,7 @@ class VESC_:
         return self.v.get_motor_position()
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     #print('MAKE SURE YOUR CAR IS ON A STAND AND WHEELS CAN SPIN FREELY')
     #input('Hit ENTER to continue...')
     # v.print_firmware_version()
