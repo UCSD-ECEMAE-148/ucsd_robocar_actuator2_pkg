@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'ucsd_robocar_actuator_pkg'
+package_name = 'ucsd_robocar_actuator2_pkg'
 
 setup(
     name=package_name,
