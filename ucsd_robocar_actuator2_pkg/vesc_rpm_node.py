@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
-from vesc_client import VESC_
+from .vesc_submodule.vesc_client import VESC_
 
 NODE_NAME = 'vesc_rpm_node'
 TOPIC_NAME = '/throttle'
