@@ -23,5 +23,6 @@ def generate_launch_description():
         output='screen'
         )
 
-    ld.add_action(sensor_node)
+    ld.add_action(steering_node)
+    ld.add_action(throttle_node)
     return ld
