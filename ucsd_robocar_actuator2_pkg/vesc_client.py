@@ -43,8 +43,8 @@ class VESC_:
 
 
 if __name__ == "__main__":
-    print('MAKE SURE YOUR CAR IS ON A STAND AND WHEELS CAN SPIN FREELY')
-    input('Hit ENTER to continue...')
+    #print('MAKE SURE YOUR CAR IS ON A STAND AND WHEELS CAN SPIN FREELY')
+    #input('Hit ENTER to continue...')
     # v.print_firmware_version()
     # backward_rpm = -10000
     # steering_angle_left = 0.0  # in the range of [0, 1]
