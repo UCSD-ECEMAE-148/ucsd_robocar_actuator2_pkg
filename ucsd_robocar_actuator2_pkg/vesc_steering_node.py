@@ -3,7 +3,7 @@ from rclpy.node import Node
 from rclpy.parameter import Parameter
 import numpy as np
 import os.path
-from vesc_client import VESC_
+from .vesc_submodule.vesc_client import VESC_
 
 NODE_NAME = 'vesc_steering_node'
 STEERING_TOPIC_NAME = '/vesc_steering'
