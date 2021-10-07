@@ -25,10 +25,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'adafruit_steering_node = ucsd_robocar_actuator_pkg.adafruit_steering_node:main',
-            'adafruit_throttle_node = ucsd_robocar_actuator_pkg.adafruit_throttle_node:main',
-            'vesc_rpm_node = ucsd_robocar_actuator_pkg.vesc_rpm_node:main',
-            'vesc_steering_node = ucsd_robocar_actuator_pkg.vesc_steering_node:main'
+            'adafruit_steering_node = ucsd_robocar_actuator2_pkg.adafruit_steering_node:main',
+            'adafruit_throttle_node = ucsd_robocar_actuator2_pkg.adafruit_throttle_node:main',
+            'vesc_rpm_node = ucsd_robocar_actuator2_pkg.vesc_rpm_node:main',
+            'vesc_steering_node = ucsd_robocar_actuator2_pkg.vesc_steering_node:main'
         ],
     },
 )
