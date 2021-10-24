@@ -86,7 +86,8 @@ This node subscribes to the [**throttle**](#Topics) topic. It then converts the 
 | vesc_rpm_node          | std_msgs.msg.Float32 | /throttle |
 
 
-`ros2 topic pub /stering std_msgs/msg/Float32 "{angle: 0.0, throttle: 0.0}"`
+`ros2 topic pub /stering std_msgs/msg/Float32 "{data: 0.0}"`
+`ros2 topic pub /throttle std_msgs/msg/Float32 "{data: 0.0}"`
 
 <div align="center">
 
