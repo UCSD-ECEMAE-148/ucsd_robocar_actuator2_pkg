@@ -1,4 +1,4 @@
-# ucsd_robocar_actuator_pkg 
+# ucsd_robocar_actuator2_pkg 
 
 <div>
 
@@ -72,6 +72,21 @@ Associated Topics:
 
 This node subscribes to the [**throttle**](#Topics) topic. It then converts the data to an integer value thats scaled by its maximum RPM. Then use the [pyVesc](#pyVesc) module through usb serial communication to send rpm commands.
 
+<div align="center">
+
+## Topics
+
+</div>
+
+| Nodes |  Msg Type | Subscribed Topics |
+| ------ | ------ | ------ |
+| adafruit_steering_node | std_msgs.msg.Float32 | /steering |
+| adafruit_throttle_node | std_msgs.msg.Float32 | /throttle |
+| vesc_steering_node     | std_msgs.msg.Float32 | /steering |
+| vesc_rpm_node          | std_msgs.msg.Float32 | /throttle |
+
+
+`ros2 topic pub /stering std_msgs/msg/Float32 "{angle: 0.0, throttle: 0.0}"`
 
 <div align="center">
 
@@ -80,13 +95,14 @@ This node subscribes to the [**throttle**](#Topics) topic. It then converts the 
 </div>
 
 
+
 #### **adafruit**
 
 Associated file: **adafruit.launch.py**
 
 This file launches both [adafruit_steering_node](#adafruit_steering_node) and [adafruit_throttle_node](#adafruit_throttle_node) nodes.
 
-`ros2 launch ucsd_robocar_actuator_pkg adafruit.launch.py`
+`ros2 launch ucsd_robocar_actuator2_pkg adafruit.launch.py`
 
 #### **vesc**
 
@@ -94,4 +110,4 @@ Associated file: **vesc.launch.py**
 
 This file launches both [vesc_steering_node](#vesc_steering_node) and [vesc_rpm_node](#vesc_rpm_node) nodes.
 
-`ros2 launch ucsd_robocar_actuator_pkg adafruit.launch.py`
+`ros2 launch ucsd_robocar_actuator2_pkg adafruit.launch.py`
