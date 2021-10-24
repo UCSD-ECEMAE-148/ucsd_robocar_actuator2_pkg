@@ -87,6 +87,7 @@ This node subscribes to the [**throttle**](#Topics) topic. It then converts the 
 
 
 `ros2 topic pub /stering std_msgs/msg/Float32 "{data: 0.0}"`
+
 `ros2 topic pub /throttle std_msgs/msg/Float32 "{data: 0.0}"`
 
 <div align="center">
