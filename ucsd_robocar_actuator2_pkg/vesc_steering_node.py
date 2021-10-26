@@ -8,7 +8,7 @@ from std_msgs.msg import Float32
 
 
 NODE_NAME = 'vesc_steering_node'
-STEERING_TOPIC_NAME = '/vesc_steering'
+STEERING_TOPIC_NAME = '/steering'
 
 
 v = VESC_()
