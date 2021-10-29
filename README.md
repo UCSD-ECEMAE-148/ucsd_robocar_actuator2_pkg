@@ -18,7 +18,7 @@
     - [adafruit](#adafruit)
     - [vesc](#vesc)
   - [**Troubleshooting**](#troubleshooting)
-    - [Camera not working](#camera-not-working)
+    - [Throttle and steering not working](#Throttle-and-steering-not-working)
 
 <div align="center">
 
