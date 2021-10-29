@@ -116,6 +116,8 @@ This file launches both [vesc_steering_node](#vesc_steering_node) and [vesc_rpm_
 
 `ros2 launch ucsd_robocar_actuator2_pkg adafruit.launch.py`
 
+## **Troubleshooting**
+
 #### **Throttle and steering not working** 
 
 If the throttle and/or steering are unresponsive, then follow the procedure below to potentially resolve the issue.
