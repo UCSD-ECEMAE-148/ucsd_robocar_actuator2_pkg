@@ -17,6 +17,8 @@
   - [**Launch**](#launch)
     - [adafruit](#adafruit)
     - [vesc](#vesc)
+  - [**Troubleshooting**](#troubleshooting)
+    - [Camera not working](#camera-not-working)
 
 <div align="center">
 
@@ -113,3 +115,18 @@ Associated file: **vesc.launch.py**
 This file launches both [vesc_steering_node](#vesc_steering_node) and [vesc_rpm_node](#vesc_rpm_node) nodes.
 
 `ros2 launch ucsd_robocar_actuator2_pkg adafruit.launch.py`
+
+#### **Throttle and steering not working** 
+
+If the throttle and/or steering are unresponsive, then follow the procedure below to potentially resolve the issue.
+
+1. Make sure ESC is turned on
+1. Make sure battery is plugged in
+1. Make sure battery has a charge
+1. Make sure servo and ESC wires are plugged into the pwm board into the correct channels correctly
+1. Check to see if the steering and throttle topics are publishing data `ros2 topic echo /steering` and `ros2 topic echo /throttle`
+1. Verify that the throttle values found in [**calibration_node**](#calibration_node) were loaded properly when running [**camera navigation**](#camera_nav_launch_py) (Values will be printed to the terminal first when running the launch file) 
+1. Restart ROS2 daemon  `ros2 daemon stop` then `ros2 daemon start`
+1. Reboot if none of the above worked and try again `sudo reboot now`
+
+If the Throttle and steering are still not working after trying the procedure above, then it could be a hardware issue. (Did the car crash?)
