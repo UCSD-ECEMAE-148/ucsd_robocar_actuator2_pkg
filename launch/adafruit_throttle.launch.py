@@ -8,7 +8,7 @@ def generate_launch_description():
     pkg = 'ucsd_robocar_actuator2_pkg'
     throttle_node_name = 'adafruit_throttle_node'
 
-    original_topic_name = '/steering'
+    original_topic_name = '/throttle'
     new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
 
     ld = LaunchDescription()
