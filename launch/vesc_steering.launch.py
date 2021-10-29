@@ -9,7 +9,7 @@ def generate_launch_description():
     steering_node_name = 'vesc_steering_node'
     throttle_node_name = 'vesc_rpm_node'
 
-    original_topic_name = 'scan'
+    original_topic_name = 'vesc/steering'
     new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
 
     ld = LaunchDescription()
