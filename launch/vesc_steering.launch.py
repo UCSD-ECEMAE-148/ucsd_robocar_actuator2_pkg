@@ -7,7 +7,6 @@ from launch_ros.actions import Node
 def generate_launch_description():
     pkg = 'ucsd_robocar_actuator2_pkg'
     steering_node_name = 'vesc_steering_node'
-    throttle_node_name = 'vesc_rpm_node'
 
     original_topic_name = '/steering'
     new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
