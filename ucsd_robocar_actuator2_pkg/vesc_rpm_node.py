@@ -12,7 +12,15 @@ class VescRPM(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
         self.rpm_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
-        self.max_rpm = 5000
+
+        # Default actuator values
+        self.default_rpm_value = int(5000)
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('max_rpm', self.default_rpm_value)
+            ])
+        self.max_rpm = self.get_parameter('max_rpm').value
 
     def callback(self, data):
         throttle = data.data  #scaled from [-1:1], need to convert to RPM
