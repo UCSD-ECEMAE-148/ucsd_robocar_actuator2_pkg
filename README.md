@@ -125,7 +125,11 @@ If the throttle and/or steering are unresponsive, then follow the procedure belo
 1. Make sure ESC is turned on
 1. Make sure battery is plugged in
 1. Make sure battery has a charge
-1. Make sure servo and ESC wires are plugged into the pwm board into the correct channels correctly
+1. -  (for adafruit) Make sure servo and ESC wires are plugged into (for adafruit) the correct channels on the pwm board and that the cables from the adafruit board are connected correctly to the jetson (**BE CAREFUL HERE, POWER DOWN CAR _COMPLETELY_ WHEN RE-WIRING!**)
+   -  (for Vesc) Make sure servo and DC motor harnes cables are plugged into vesc and that the usb cable for vesc is plugged into Jetson
+1. Check if **host jetson** can recognize the actuators (for adafruit) `sudo i2cdetect -y 1` (for vesc) `ls /dev/ttyACM0`
+1. Check that the **docker container** can recognize the actuators (for adafruit) `sudo i2cdetect -y 1` (for vesc) `ls /dev/ttyACM0`
+1. Make sure adafruit/Vesc was plugged in all the way into its GPIO/USB socket (**if unplugged, the docker container needs to be restarted in ordered to be recognized**)
 1. Check to see if the steering and throttle topics are publishing data `ros2 topic echo /steering` and `ros2 topic echo /throttle`
 1. Verify that the throttle values found in [**calibration_node**](#calibration_node) were loaded properly when running [**camera navigation**](#camera_nav_launch_py) (Values will be printed to the terminal first when running the launch file) 
 1. Restart ROS2 daemon  `ros2 daemon stop` then `ros2 daemon start`
