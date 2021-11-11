@@ -83,7 +83,7 @@ This node subscribes to the [**throttle**](#Topics) topic. It then converts the 
 </div>
 
 | Nodes |  Msg Type | Subscribed Topics | info |
-| ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ |
 | adafruit_steering_node | std_msgs.msg.Float32 | /steering | value range: [-1,1] |
 | adafruit_throttle_node | std_msgs.msg.Float32 | /throttle | value range: [-1,1] |
 | vesc_steering_node     | std_msgs.msg.Float32 | /steering | value range: [-1,1] |
