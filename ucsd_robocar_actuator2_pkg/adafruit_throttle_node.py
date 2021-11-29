@@ -6,6 +6,10 @@ from adafruit_servokit import ServoKit
 NODE_NAME = 'adafruit_throttle_node'
 TOPIC_NAME = '/throttle'
 
+'''
+[-1,1] : [max_reverse, max_forward]
+'''
+
 
 class AdafruitThrottle(Node):
     def __init__(self):
