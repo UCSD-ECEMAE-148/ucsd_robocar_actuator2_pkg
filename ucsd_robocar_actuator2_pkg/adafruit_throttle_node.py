@@ -4,13 +4,14 @@ from std_msgs.msg import Float32
 from adafruit_servokit import ServoKit
 
 NODE_NAME = 'adafruit_throttle_node'
-THROTTLE_TOPIC_NAME = '/throttle'
+TOPIC_NAME = '/throttle'
 
 
 class AdafruitThrottle(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.rpm_subscriber = self.create_subscription(Float32, THROTTLE_TOPIC_NAME, self.callback, 10)
+        self.rpm_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
+        kit = ServoKit(channels=16)
 
 
     def callback(self, data):
