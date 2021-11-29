@@ -6,6 +6,9 @@ from adafruit_servokit import ServoKit
 NODE_NAME = 'adafruit_steering_node'
 STEERING_TOPIC_NAME = 'adafruit_steering'
 
+'''
+[-1,1] : [max_left, max_right]
+'''
 
 class AdafruitSteering(Node):
     def __init__(self):
