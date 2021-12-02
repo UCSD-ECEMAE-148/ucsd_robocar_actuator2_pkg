@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import rospy
+import rclpy
+from rclpy.node import Node
 from std_msgs.msg import Float32
 from adafruit_servokit import ServoKit
 
