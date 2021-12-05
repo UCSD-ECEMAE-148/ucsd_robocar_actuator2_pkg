@@ -44,7 +44,7 @@ def main(args=None):
         rclpy.spin(vesc_twist)
         vesc_twist.destroy_node()
         rclpy.shutdown()
-    except FileNotFoundError:
+    except:
         vesc_twist.get_logger().info(f'Could not connect to VESC, Shutting down {NODE_NAME}...')
         time.sleep(1)
         vesc_twist.destroy_node()
