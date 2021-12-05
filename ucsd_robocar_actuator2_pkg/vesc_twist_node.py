@@ -6,11 +6,11 @@ from .vesc_submodule.vesc_client import VESC_
 NODE_NAME = 'vesc_twist_node'
 TOPIC_NAME = '/cmd_vel'
 
-v = VESC_()
 
 class VescTwist(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
+        self.v = VESC_()
         self.rpm_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.callback, 10)
 
         # Default actuator values
@@ -33,8 +33,8 @@ class VescTwist(Node):
         # RPM map from [-1,1] --> [-max_rpm,max_rpm]
         rpm = int(self.max_rpm * msg.linear.x)
 
-        v.send_rpm(rpm)
-        v.send_servo_angle(steering_angle)
+        self.v.send_rpm(rpm)
+        self.v.send_servo_angle(steering_angle)
 
 
 def main(args=None):
