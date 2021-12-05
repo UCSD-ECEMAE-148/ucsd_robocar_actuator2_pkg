@@ -18,7 +18,7 @@ class VESC_:
             self.v = VESC(self.serial_port, self.baudrate, self.has_sensor, self.start_heartbeat)
             print("VESC Connected")
         except FileNotFoundError:
-        print("Could not connect to VESC")
+            print("Could not connect to VESC")
 
         self.send_rpm(0)
         self.inverted = -1 if self.is_inverted else 1
