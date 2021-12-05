@@ -24,6 +24,7 @@ class VescTwist(Node):
         self.max_rpm = self.get_parameter('max_rpm').value
 
     def callback(self, msg):
+        self.max_rpm = self.get_parameter('max_rpm').value
         # Steering map from [-1,1] --> [0,1]  
         vesc_min_limit = 0
         vesc_max_limit = 1
