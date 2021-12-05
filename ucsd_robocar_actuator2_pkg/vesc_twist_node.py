@@ -34,10 +34,10 @@ class VescTwist(Node):
         self.steering_polarity = self.get_parameter('steering_polarity').value # ability to update steering polarity in real-time
         self.throttle_polarity = self.get_parameter('throttle_polarity').value # ability to update throttle polarity in real-time
         # Steering map from [-1,1] --> [0,1]  
-        vesc_min_limit = 0
-        vesc_max_limit = 1
         data_min_limit = -1
-        data_max_limit = 1
+        data_max_limit = 1 
+        vesc_min_limit = 0 # These will be rosparams eventually... : max_left
+        vesc_max_limit = 1 # These will be rosparams eventually... : max_right
         steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(vesc_max_limit - vesc_min_limit))/(data_max_limit-data_min_limit))
         
         # RPM map from [-1,1] --> [-max_rpm,max_rpm]
