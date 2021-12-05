@@ -31,7 +31,7 @@ class AdafruitTwist(Node):
         data_max_limit = 1
         adafruit_min_limit = -1 # These will be rosparams eventually... : max_left
         adafruit_max_limit = 1  # These will be rosparams eventually... : max_right
-        steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(vesc_max_limit - vesc_min_limit))/(data_max_limit-data_min_limit))
+        steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(adafruit_max_limit - adafruit_min_limit))/(data_max_limit-data_min_limit))
 
         # Send values to adafruit board
         self.kit.servo[1].angle = float(self.steering_polarity * 90 * (1 + steering_angle))
