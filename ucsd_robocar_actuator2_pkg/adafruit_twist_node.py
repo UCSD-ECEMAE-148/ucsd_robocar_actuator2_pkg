@@ -1,7 +1,6 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
-from .vesc_submodule.vesc_client import VESC_
 
 NODE_NAME = 'adafruit_twist_node'
 TOPIC_NAME = '/cmd_vel'
