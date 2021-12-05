@@ -17,11 +17,10 @@ class VESC_:
         try:
             self.v = VESC(self.serial_port, self.baudrate, self.has_sensor, self.start_heartbeat)
             print("VESC Connected")
+            self.send_rpm(0)
+            self.inverted = -1 if self.is_inverted else 1
         except:
             print("Could not connect to VESC")
-
-        self.send_rpm(0)
-        self.inverted = -1 if self.is_inverted else 1
 
     def print_firmware_version(self):
         print("VESC Firmware Version: ", self.v.get_firmware_version())
