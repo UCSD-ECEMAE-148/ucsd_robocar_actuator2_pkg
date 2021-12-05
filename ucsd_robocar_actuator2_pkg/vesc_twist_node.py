@@ -39,10 +39,17 @@ class VescTwist(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    vesc_twist = VescTwist()
-    rclpy.spin(vesc_twist)
-    vesc_twist.destroy_node()
-    rclpy.shutdown()
+    try:
+        vesc_twist = VescTwist()
+        rclpy.spin(vesc_twist)
+        vesc_twist.destroy_node()
+        rclpy.shutdown()
+    except FileNotFoundError:
+        vesc_twist.get_logger().info(f'Could not connect to VESC, Shutting down {NODE_NAME}...')
+        time.sleep(1)
+        vesc_twist.destroy_node()
+        rclpy.shutdown()
+        vesc_twist.get_logger().info(f'{NODE_NAME} shut down successfully.')
 
 
 if __name__ == '__main__':
