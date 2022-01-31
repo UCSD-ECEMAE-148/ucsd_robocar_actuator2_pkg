@@ -88,6 +88,8 @@ This node subscribes to the [**throttle**](#Topics) topic. It then converts the 
 | adafruit_throttle_node | std_msgs.msg.Float32 | /throttle | value range: [-1,1] |
 | vesc_steering_node     | std_msgs.msg.Float32 | /steering | value range: [-1,1] |
 | vesc_rpm_node          | std_msgs.msg.Float32 | /throttle | value range: [-1,1] |
+| adafruit_twist_node    | geometry_msgs.msg.Twist | /cmd_vel | linear.x (forwards/backwards) angular.z (steering) ranges: [-1,1] |
+| vesc_twist_node        | geometry_msgs.msg.Twist | /cmd_vel | linear.x (forwards/backwards) angular.z (steering) ranges: [-1,1] |
 
 
 `ros2 topic pub /stering std_msgs/msg/Float32 "{data: 0.0}"`
