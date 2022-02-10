@@ -45,17 +45,20 @@ class VESC_:
         return self.v.get_motor_position()
 
 
-# if __name__ == "__main__":
-    #print('MAKE SURE YOUR CAR IS ON A STAND AND WHEELS CAN SPIN FREELY')
-    #input('Hit ENTER to continue...')
-    # v.print_firmware_version()
-    # backward_rpm = -10000
-    # steering_angle_left = 0.0  # in the range of [0, 1]
-    # steering_angle_right = 1.0
-    # v = VESC_()
-    # steering_angle_straight = 0.5
-    # v.send_servo_angle(steering_angle_right)
-    # time.sleep(2)
+if __name__ == "__main__":
+    print('MAKE SURE YOUR CAR IS ON A STAND AND WHEELS CAN SPIN FREELY')
+    input('Hit ENTER to continue...')
+    v.print_firmware_version()
+    backward_rpm = -10000
+    steering_angle_left = 0.0  # in the range of [0, 1]
+    steering_angle_right = 1.0
+    v = VESC_()
+    steering_angle_straight = 0.5
+    v.send_servo_angle(steering_angle_right)
+    time.sleep(2)
+    v.send_rpm(5000)
+    time.sleep(2)
+    v.send_rpm(0)
     #
     # n = 23.8 # gear ratio
     # forward_rpm = 3000
