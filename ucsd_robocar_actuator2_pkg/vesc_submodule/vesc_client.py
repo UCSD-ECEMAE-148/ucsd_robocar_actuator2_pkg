@@ -56,7 +56,7 @@ if __name__ == "__main__":
     steering_angle_straight = 0.5
     v.send_servo_angle(steering_angle_right)
     time.sleep(2)
-    v.send_rpm(5000)
+    v.send_rpm(10000)
     time.sleep(2)
     v.send_rpm(0)
     #
