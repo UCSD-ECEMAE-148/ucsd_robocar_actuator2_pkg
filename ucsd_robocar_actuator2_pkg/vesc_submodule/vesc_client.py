@@ -59,6 +59,7 @@ if __name__ == "__main__":
     v.send_rpm(10000)
     time.sleep(2)
     v.send_rpm(0)
+    v.send_servo_angle(steering_angle_straight)
     #
     # n = 23.8 # gear ratio
     # forward_rpm = 3000
