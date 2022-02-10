@@ -60,15 +60,18 @@ if __name__ == "__main__":
     print('right turn')
     time.sleep(2)
     v.send_servo_angle(steering_angle_right)
+
+    print('turn straight')
+    time.sleep(2)
+    v.send_servo_angle(steering_angle_straight)
     
     print('go forward')
     time.sleep(2)
     v.send_rpm(15000)
     
-    print('stop and turn straight')
+    print('stop')
     time.sleep(2)
     v.send_rpm(0)
-    v.send_servo_angle(steering_angle_straight)
     #
     # n = 23.8 # gear ratio
     # forward_rpm = 3000
