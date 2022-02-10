@@ -55,6 +55,8 @@ if __name__ == "__main__":
     steering_angle_right = 1.0
     steering_angle_straight = 0.5
 
+    v.send_servo_angle(steering_angle_straight)
+
     print('right turn')
     time.sleep(2)
     v.send_servo_angle(steering_angle_right)
