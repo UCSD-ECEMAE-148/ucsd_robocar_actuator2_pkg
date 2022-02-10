@@ -54,9 +54,16 @@ if __name__ == "__main__":
     steering_angle_left = 0.0  # in the range of [0, 1]
     steering_angle_right = 1.0
     steering_angle_straight = 0.5
-    v.send_servo_angle(steering_angle_right)
+
+    print('right turn')
     time.sleep(2)
-    v.send_rpm(10000)
+    v.send_servo_angle(steering_angle_right)
+    
+    print('go forward')
+    time.sleep(2)
+    v.send_rpm(15000)
+    
+    print('stop and turn straight')
     time.sleep(2)
     v.send_rpm(0)
     v.send_servo_angle(steering_angle_straight)
