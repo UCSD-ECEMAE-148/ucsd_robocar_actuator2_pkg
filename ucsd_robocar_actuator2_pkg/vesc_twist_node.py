@@ -29,10 +29,22 @@ class VescTwist(Node):
         self.steering_polarity = int(self.get_parameter('steering_polarity').value)
         self.throttle_polarity = int(self.get_parameter('throttle_polarity').value)
 
+        self.get_logger().info(
+            f'\nmax_rpm: {self.max_rpm}'
+            f'\nsteering_polarity: {self.steering_polarity}'
+            f'\nthrottle_polarity: {self.throttle_polarity}'
+            )
+
+
     def callback(self, msg):
         self.max_rpm = self.get_parameter('max_rpm').value # ability to update max RPM in real-time
         self.steering_polarity = self.get_parameter('steering_polarity').value # ability to update steering polarity in real-time
         self.throttle_polarity = self.get_parameter('throttle_polarity').value # ability to update throttle polarity in real-time
+        self.get_logger().info(
+            f'\nmax_rpm: {self.max_rpm}'
+            f'\nsteering_polarity: {self.steering_polarity}'
+            f'\nthrottle_polarity: {self.throttle_polarity}'
+            )
         # Steering map from [-1,1] --> [0,1]  
         data_min_limit = -1
         data_max_limit = 1 
