@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
+from adafruit_servokit import ServoKit
 
 NODE_NAME = 'adafruit_twist_node'
 TOPIC_NAME = '/cmd_vel'
