@@ -41,10 +41,18 @@ class AdafruitTwist(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    adafruit_twist = AdafruitTwist()
-    rclpy.spin(adafruit_twist)
-    adafruit_twist.destroy_node()
-    rclpy.shutdown()
+    try:
+        adafruit_twist = AdafruitTwist()
+        rclpy.spin(adafruit_twist)
+        adafruit_twist.destroy_node()
+        rclpy.shutdown()
+    except:
+        adafruit_twist.get_logger().info(f'Could not connect to Adafruit, Shutting down {NODE_NAME}...')
+        time.sleep(1)
+        adafruit_twist.destroy_node()
+        rclpy.shutdown()
+        adafruit_twist.get_logger().info(f'{NODE_NAME} shut down successfully.')
+
 
 
 if __name__ == '__main__':
