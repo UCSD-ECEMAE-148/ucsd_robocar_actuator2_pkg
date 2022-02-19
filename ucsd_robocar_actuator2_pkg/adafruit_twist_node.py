@@ -10,7 +10,14 @@ class AdafruitTwist(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
         self.rpm_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.callback, 10)
-        self.kit = ServoKit(channels=16)
+        self.bus_num = 1
+        self.steering_channel = 1
+        self.throttle_channel = 2
+        if self.bus_num == 0:
+            i2c_bus0=(busio.I2C(board.SCL_1, board.SDA_1))
+            self.kit = ServoKit(channels=16, i2c=i2c_bus0)
+        else:
+            self.kit = ServoKit(channels=16)
 
         # Default actuator values
         self.default_steering_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
@@ -35,8 +42,8 @@ class AdafruitTwist(Node):
         steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(adafruit_max_limit - adafruit_min_limit))/(data_max_limit-data_min_limit))
 
         # Send values to adafruit board 
-        self.kit.servo[1].angle = float(self.steering_polarity * 90 * (1 + msg.angular.z))
-        self.kit.continuous_servo[2].throttle = self.throttle_polarity * msg.linear.x
+        self.kit.servo[self.steering_channel].angle = float(self.steering_polarity * 90 * (1 + msg.angular.z))
+        self.kit.continuous_servo[self.throttle_channel].throttle = self.throttle_polarity * msg.linear.x
 
 
 def main(args=None):
