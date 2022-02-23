@@ -42,7 +42,7 @@ class AdafruitTwist(Node):
         steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(adafruit_max_limit - adafruit_min_limit))/(data_max_limit-data_min_limit))
 
         # Send values to adafruit board 
-        self.kit.servo[self.steering_channel].angle = float(self.steering_polarity * 90 * (1 + msg.angular.z))
+        self.kit.servo[self.steering_channel].angle = float(90 * (1 + self.steering_polarity * msg.angular.z))
         self.kit.continuous_servo[self.throttle_channel].throttle = self.throttle_polarity * msg.linear.x
 
 
