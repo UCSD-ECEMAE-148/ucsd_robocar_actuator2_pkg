@@ -40,14 +40,14 @@ class AdafruitServo(Node):
             self.kit = ServoKit(channels=16)
 
     def callback(self, data):
-        angle = data.data
-        if angle > self.max_limit:
-            angle = self.max_limit
-        elif angle < self.min_limit:
-            angle = self.min_limit
+        servo_angle = data.data
+        if servo_angle > self.max_limit:
+            servo_angle = self.max_limit
+        elif servo_angle < self.min_limit:
+            servo_angle = self.min_limit
         else:
             pass
-        kit.servo[self.servo_channel].angle = 
+        kit.servo[self.servo_channel].angle = servo_angle
 
 
 def main(args=None):
