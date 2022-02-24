@@ -32,4 +32,3 @@ def generate_launch_description():
         parameters=[config])
     ld.add_action(adafruit_servo_node)
     return ld
-
