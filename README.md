@@ -84,6 +84,8 @@ Associated Topics:
 This node subscribes to the [**servo**](#topics) topic. Then use the [**adafruit_servokit**](#adafruit_servokit)
 module and is left to the user to decide which **channel** to send signals to.
 
+The bus and channel numbers are parameters that can be changed as needed by modifying the **adafruit_servo_calibration.yaml** file in the config directory.
+
 
 ### **vesc_steering_node**
 
