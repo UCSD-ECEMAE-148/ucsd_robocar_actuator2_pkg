@@ -16,8 +16,17 @@ class AdafruitServo(Node):
         super().__init__(NODE_NAME)
         self.steering_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
         self.kit = ServoKit(channels=16)
-        self.bus_num = 1
-        self.servo_channel = 1
+        self.default_bus_num = int(1)
+        self.default_servo_channel = int(3)
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('bus_num', self.default_bus_num),
+                ('servo_channel', self.default_servo_channel)
+            ])
+        self.bus_num = int(self.get_parameter('bus_num').value)
+        self.servo_channel = int(self.get_parameter('servo_channel').value)
+
         if self.bus_num == 0:
             i2c_bus0 = (busio.I2C(board.SCL_1, board.SDA_1))
             self.kit = ServoKit(channels=16, i2c=i2c_bus0)
