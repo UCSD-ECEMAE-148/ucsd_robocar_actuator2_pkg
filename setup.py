@@ -32,7 +32,8 @@ setup(
             'vesc_rpm_node = ucsd_robocar_actuator2_pkg.vesc_rpm_node:main',
             'vesc_steering_node = ucsd_robocar_actuator2_pkg.vesc_steering_node:main',
             'vesc_twist_node = ucsd_robocar_actuator2_pkg.vesc_twist_node:main',
-            'adafruit_twist_node = ucsd_robocar_actuator2_pkg.adafruit_twist_node:main'
+            'adafruit_twist_node = ucsd_robocar_actuator2_pkg.adafruit_twist_node:main',
+            'adafruit_servo_node = ucsd_robocar_actuator2_pkg.adafruit_servo_node:main'
         ],
     },
 )
