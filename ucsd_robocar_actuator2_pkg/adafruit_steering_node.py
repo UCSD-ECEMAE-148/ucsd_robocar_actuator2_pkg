@@ -5,7 +5,7 @@ from std_msgs.msg import Float32
 from adafruit_servokit import ServoKit
 
 NODE_NAME = 'adafruit_steering_node'
-STEERING_TOPIC_NAME = 'adafruit_steering'
+STEERING_TOPIC_NAME = '/steering'
 
 '''
 [-1,1] : [max_left, max_right]
