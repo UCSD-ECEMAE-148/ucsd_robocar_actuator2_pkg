@@ -15,16 +15,23 @@ class AdafruitServo(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
         self.steering_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
+        self.kit = ServoKit(channels=16)
         self.default_bus_num = int(1)
         self.default_servo_channel = int(3)
+        self.default_max_limit = 180
+        self.default_min_limit = 0
         self.declare_parameters(
             namespace='',
             parameters=[
                 ('bus_num', self.default_bus_num),
-                ('servo_channel', self.default_servo_channel)
+                ('servo_channel', self.default_servo_channel),
+                ('max_limit', self.default_max_limit),
+                ('min_limit', self.default_min_limit)
             ])
         self.bus_num = int(self.get_parameter('bus_num').value)
         self.servo_channel = int(self.get_parameter('servo_channel').value)
+        self.max_limit = int(self.get_parameter('max_limit').value)
+        self.min_limit = int(self.get_parameter('min_limit').value)
 
         if self.bus_num == 0:
             i2c_bus0 = (busio.I2C(board.SCL_1, board.SDA_1))
@@ -33,7 +40,14 @@ class AdafruitServo(Node):
             self.kit = ServoKit(channels=16)
 
     def callback(self, data):
-        kit.servo[self.servo_channel].angle = data.data
+        angle = data.data
+        if angle > self.max_limit:
+            angle = self.max_limit
+        elif angle < self.min_limit:
+            angle = self.min_limit
+        else:
+            pass
+        kit.servo[self.servo_channel].angle = 
 
 
 def main(args=None):
