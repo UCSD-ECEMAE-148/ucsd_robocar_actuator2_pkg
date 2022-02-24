@@ -5,7 +5,7 @@ from std_msgs.msg import Float32
 from adafruit_servokit import ServoKit
 
 NODE_NAME = 'adafruit_servo_node'
-TOPIC_NAME = 'adafruit_servo'
+TOPIC_NAME = '/servo'
 
 '''
 [0, 180]degrees: [full right, full left]
