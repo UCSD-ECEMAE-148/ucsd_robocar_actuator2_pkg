@@ -55,7 +55,6 @@ def main(args=None):
         rclpy.shutdown()
     except:
         adafruit_twist.get_logger().info(f'Could not connect to Adafruit, Shutting down {NODE_NAME}...')
-        time.sleep(1)
         adafruit_twist.destroy_node()
         rclpy.shutdown()
         adafruit_twist.get_logger().info(f'{NODE_NAME} shut down successfully.')
