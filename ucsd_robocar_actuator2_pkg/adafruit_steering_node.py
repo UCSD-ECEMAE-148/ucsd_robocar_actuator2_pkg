@@ -19,9 +19,8 @@ class AdafruitSteering(Node):
 
 
     def callback(self, data):
-        normalized_steering = data.data
-        angle_delta = normalized_steering * 90  # difference in degrees from the center 90 degrees
-        kit.servo[1].angle = 90 + angle_delta
+        angle_delta = data.data * 90  # difference in degrees from the center 90 degrees
+        self.kit.servo[1].angle = 90 + angle_delta
 
 
 
