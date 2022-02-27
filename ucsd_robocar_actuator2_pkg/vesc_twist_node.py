@@ -15,7 +15,7 @@ class VescTwist(Node):
         self.rpm_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.callback, 10)
 
         # Default actuator values
-        self.default_rpm_value = int(5000) 
+        self.default_rpm_value = int(10000) 
         self.default_steering_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
         self.default_throttle_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
         self.declare_parameters(
