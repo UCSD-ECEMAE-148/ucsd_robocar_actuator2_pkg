@@ -3,6 +3,8 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
 from adafruit_servokit import ServoKit
+import board
+import busio
 
 NODE_NAME = 'adafruit_servo_node'
 TOPIC_NAME = '/servo'
