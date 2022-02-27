@@ -53,7 +53,8 @@ class VescTwist(Node):
         steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(vesc_max_limit - vesc_min_limit))/(data_max_limit-data_min_limit))
         
         # RPM map from [-1,1] --> [-max_rpm,max_rpm]
-        rpm = self.max_rpm * msg.linear.x
+        rpm = int(self.max_rpm * msg.linear.x)
+        self.get_logger().info(f'rpm: {rpm}, steering_angle: {steering_angle}')
 
         self.vesc.send_rpm(int(self.throttle_polarity * rpm))
         self.vesc.send_servo_angle(float(self.steering_polarity * steering_angle))
