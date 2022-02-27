@@ -17,7 +17,6 @@ class AdafruitServo(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
         self.steering_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
-        self.kit = ServoKit(channels=16)
         self.default_bus_num = int(1)
         self.default_servo_channel = int(3)
         self.default_max_limit = 180
@@ -49,7 +48,7 @@ class AdafruitServo(Node):
             servo_angle = self.min_limit
         else:
             pass
-        kit.servo[self.servo_channel].angle = servo_angle
+        self.kit.servo[self.servo_channel].angle = servo_angle
 
 
 def main(args=None):
