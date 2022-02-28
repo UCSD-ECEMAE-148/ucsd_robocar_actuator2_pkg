@@ -72,13 +72,13 @@ class VescTwist(Node):
         self.vesc.send_rpm(int(self.throttle_polarity * rpm))
         self.vesc.send_servo_angle(float(self.steering_polarity * steering_angle))
 
-        def remap(self, value):
-            input_start = -1
-            input_end = 1
-            output_start = 0
-            output_end = 1
-            normalized_output = float(output_start + (value - input_start) * ((output_end - output_start) / (input_end - input_start)))
-            return normalized_output
+    def remap(self, value):
+        input_start = -1
+        input_end = 1
+        output_start = 0
+        output_end = 1
+        normalized_output = float(output_start + (value - input_start) * ((output_end - output_start) / (input_end - input_start)))
+        return normalized_output
 
 
 
