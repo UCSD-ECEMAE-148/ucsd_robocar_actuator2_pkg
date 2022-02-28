@@ -17,7 +17,7 @@ class VescTwist(Node):
         self.default_rpm_value = int(10000) 
         self.default_steering_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
         self.default_throttle_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
-        self.steering_offset = -0.1
+        self.steering_offset = 0.0
         self.declare_parameters(
             namespace='',
             parameters=[
