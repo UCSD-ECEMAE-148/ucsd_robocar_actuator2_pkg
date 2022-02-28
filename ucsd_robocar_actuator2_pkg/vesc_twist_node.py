@@ -37,6 +37,9 @@ class VescTwist(Node):
         self.straight_steering = self.get_parameter('straight_steering').value
         self.max_left_steering = self.get_parameter('max_left_steering').value
 
+        
+        self.steering_offset = 0.5 + self.remap(self.straight_steering)
+
         self.get_logger().info(
             f'\nmax_rpm: {self.max_rpm}'
             f'\nsteering_polarity: {self.steering_polarity}'
@@ -44,8 +47,8 @@ class VescTwist(Node):
             f'\nmax_right_steering: {self.max_right_steering}'
             f'\nstraight_steering: {self.straight_steering}'
             f'\nmax_left_steering: {self.max_left_steering}'
+            f'\nsteering_offset: {self.steering_offset}'
             )
-        self.steering_offset = 0.5 - self.remap(self.straight_steering)
 
 
     def callback(self, msg):
