@@ -17,6 +17,7 @@ class VescTwist(Node):
         self.default_rpm_value = int(10000) 
         self.default_steering_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
         self.default_throttle_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
+        self.steering_offset = 0.0
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -49,7 +50,7 @@ class VescTwist(Node):
         data_max_limit = 1 
         vesc_min_limit = 0 # These will be rosparams eventually... : max_left
         vesc_max_limit = 1 # These will be rosparams eventually... : max_right
-        steering_angle = float(-0.1 + ((msg.angular.z-data_min_limit)*(vesc_max_limit - vesc_min_limit))/(data_max_limit-data_min_limit))
+        steering_angle = float(self.steering_offset + ((msg.angular.z-data_min_limit)*(vesc_max_limit - vesc_min_limit))/(data_max_limit-data_min_limit))
         
         # RPM map from [-1,1] --> [-max_rpm,max_rpm]
         rpm = int(self.max_rpm * msg.linear.x)
