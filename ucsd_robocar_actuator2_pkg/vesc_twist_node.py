@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from .vesc_submodule.vesc_client import VESC_
-import time
 
 NODE_NAME = 'vesc_twist_node'
 TOPIC_NAME = '/cmd_vel'
@@ -69,7 +68,6 @@ def main(args=None):
         rclpy.shutdown()
     except:
         vesc_twist.get_logger().info(f'Could not connect to VESC, Shutting down {NODE_NAME}...')
-        time.sleep(1)
         vesc_twist.destroy_node()
         rclpy.shutdown()
         vesc_twist.get_logger().info(f'{NODE_NAME} shut down successfully.')
