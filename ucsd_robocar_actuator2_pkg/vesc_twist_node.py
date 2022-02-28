@@ -36,9 +36,7 @@ class VescTwist(Node):
         self.max_right_steering = self.get_parameter('max_right_steering').value
         self.straight_steering = self.get_parameter('straight_steering').value
         self.max_left_steering = self.get_parameter('max_left_steering').value
-
-        
-        self.steering_offset = 0.5 - self.remap(self.straight_steering)
+        self.steering_offset = self.remap(self.straight_steering) - 0.5
 
         self.get_logger().info(
             f'\nmax_rpm: {self.max_rpm}'
@@ -52,18 +50,13 @@ class VescTwist(Node):
 
 
     def callback(self, msg):
-        # # Steering map from [-1,1] --> [0,1]  
-        # data_min_limit = -1
-        # data_max_limit = 1 
-        # vesc_min_limit = 0 # These will be rosparams eventually... : max_left
-        # vesc_max_limit = 1 # These will be rosparams eventually... : max_right msg.angular.z
-        # steering_angle = float(self.steering_offset + ((msg.angular.z-data_min_limit) * (vesc_max_limit - vesc_min_limit)) / (data_max_limit-data_min_limit))
+        # # Steering map from [-1,1] --> [0,1]
         steering_angle = float(self.steering_offset + self.remap(msg.angular.z))
         
         # RPM map from [-1,1] --> [-max_rpm,max_rpm]
         rpm = int(self.max_rpm * msg.linear.x)
-        self.get_logger().info(f'rpm: {rpm}, steering_angle: {steering_angle}')
 
+        self.get_logger().info(f'rpm: {rpm}, steering_angle: {steering_angle}')
         self.vesc.send_rpm(int(self.throttle_polarity * rpm))
         self.vesc.send_servo_angle(float(self.steering_polarity * steering_angle))
 
