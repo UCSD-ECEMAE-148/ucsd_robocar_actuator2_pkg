@@ -99,11 +99,11 @@ The bus and channel numbers are parameters that can be changed as needed by modi
 | adafruit_servo_node    | std_msgs.msg.Float32 | /servo    | value range (degrees): [0,180] |
 | adafruit_continuous_servo_node | std_msgs.msg.Float32 | /continuous_servo | value range: [-1,1] |
 
-Publish messages from command line:
+Examples of publishing messages from command line:
 
-- continuous_servo : `ros2 topic pub /continuous_servo std_msgs/msg/Float32 "{data: 0.0}"`
-- servo: `ros2 topic pub /servo std_msgs/msg/Float32 "{data: 90.0}"`
 - cmd_vel: `ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"`
+- servo: `ros2 topic pub /servo std_msgs/msg/Float32 "{data: 90.0}"`
+- continuous_servo : `ros2 topic pub /continuous_servo std_msgs/msg/Float32 "{data: 0.0}"`
 
 
 <div align="center">
