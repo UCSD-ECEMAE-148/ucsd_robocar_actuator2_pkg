@@ -1,4 +1,5 @@
 adafruit_twist_node: 
   ros__parameters: 
     bus_num : 1
-    servo_channel : 3
+    steering_channel : 1
+    throttle_channel : 2
