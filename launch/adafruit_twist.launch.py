@@ -16,8 +16,13 @@ def generate_launch_description():
     node_name = 'adafruit_twist_node'
     calibration_file = 'ros_racer_calibration.yaml'
 
-    config = os.path.join(
+    lane_detection_config = os.path.join(
         get_package_share_directory(lane_detection2_package),
+        'config',
+        calibration_file)
+
+    board_config = os.path.join(
+        get_package_share_directory(pkg),
         'config',
         calibration_file)
 
@@ -30,6 +35,6 @@ def generate_launch_description():
         executable=node_name,
         output='screen',
         remappings=[(original_topic_name,new_topic_name)],
-        parameters=[config])
+        parameters=[lane_detection_config, ])
     ld.add_action(adafruit_twist_node)
     return ld
