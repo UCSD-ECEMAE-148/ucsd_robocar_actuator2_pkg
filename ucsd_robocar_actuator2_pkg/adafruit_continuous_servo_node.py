@@ -19,8 +19,8 @@ class AdafruitContinuousServo(Node):
         self.steering_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
         self.default_bus_num = int(1)
         self.default_continuous_servo_channel = int(4)
-        self.default_max_forward_limit = 1
-        self.default_max_reverse_limit = -1
+        self.default_max_forward_limit = 1.0
+        self.default_max_reverse_limit = -1.0
         self.declare_parameters(
             namespace='',
             parameters=[
