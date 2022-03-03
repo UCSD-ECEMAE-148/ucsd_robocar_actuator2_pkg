@@ -9,23 +9,17 @@
     - [adafruit_servokit](#adafruit_servokit)
     - [pyVesc](#pyVesc)
   - [**Nodes**](#nodes)
-    - [adafruit_steering_node](#adafruit_steering_node)
-    - [adafruit_throttle_node](#adafruit_throttle_node)
+    - [vesc_twist_node](#vesc_twist_node)
     - [adafruit_twist_node](#adafruit_twist_node)
     - [adafruit_servo_node](#adafruit_servo_node)
-    - [vesc_steering_node](#vesc_steering_node)
-    - [vesc_rpm_node](#vesc_rpm_node)
-    - [vesc_twist_node](#vesc_twist_node)
+    - [adafruit_continuous_servo_node](#adafruit_continuous_servo_node)
   - [**Topics**](#topics)
-    - [steering](#topics)
-    - [throttle](#topics)
     - [cmd_vel](#topics)
     - [servo](#topics)
+    - [continuous_servo](#topics)
   - [**Launch**](#launch)
-    - [adafruit](#adafruit)
-    - [adafruit_twist](#adafruit_twist)
-    - [vesc](#vesc)
     - [vesc_twist](#vesc_twist)
+    - [adafruit_twist](#adafruit_twist)
   - [**Troubleshooting**](#troubleshooting)
     - [Throttle and steering not working](#throttle-and-steering-not-working)
 
@@ -44,25 +38,16 @@
 
 </div>
 
-### **adafruit_steering_node**
+### **vesc_twist_node**
 
-Associated file: **adafruit_steering_node.py**
-
-Associated Topics:
-- Subscribes to [**steering**](#topics)
-
-This node subscribes to the [**steering**](#topics) topic. Then use the [**adafruit_servokit**](#adafruit_servokit)
-module on **channel 1** for sending signals to the hardware.
-
-### **adafruit_throttle_node**
-
-Associated file: **adafruit_throttle_node.py**
+Associated file: **vesc_twist_node.py**
 
 Associated Topics:
-- Subscribes to [**throttle**](#topics)
+- Subscribes to [cmd_vel](#topics) 
 
-This node subscribes to the [**throttle**](#topics) topic. Then use the [**adafruit_servokit**](#adafruit_servokit)
-module on **channel 2** for sending signals to the hardware.
+This node subscribes to the [cmd_vel](#topics) topic. This message structure is common throughout many packages in ROS and makes integrating them much easier. In the message, **linear.x** is for the forwards/backwards motion and **angular.z** is for the steering/yaw motion of the robot.
+The message must then be decoded to be compatible with the [**pyVesc**](#pyVesc) module.
+
 
 ### **adafruit_twist_node**
 
@@ -86,35 +71,18 @@ module and is left to the user to decide which **channel** to send signals to.
 
 The bus and channel numbers are parameters that can be changed as needed by modifying the **adafruit_servo_calibration.yaml** file in the config directory.
 
+### **adafruit_continuous_servo_node**
 
-### **vesc_steering_node**
-
-Associated file: **vesc_steering_node.py**
-
-Associated Topics:
-- Subscribes to [**steering**](#topics)
-
-This node subscribes to the [**steering**](#topics) topic. Then use the [pyVesc](#pyVesc)
-module through usb serial communication to send steering commands.
-
-### **vesc_rpm_node**
-
-Associated file: **vesc_rpm_node.py**
+Associated file: **adafruit_continuous_servo_node.py**
 
 Associated Topics:
-- Subscribes to [**throttle**](#topics)
+- Subscribes to [**continuous_servo**](#topics)
 
-This node subscribes to the [**throttle**](#topics) topic. It then converts the data to an integer value thats scaled by its maximum RPM. Then use the [**pyVesc**](#pyVesc) module through usb serial communication to send rpm commands.
+This node subscribes to the [**continuous_servo**](#topics) topic. Then use the [**adafruit_servokit**](#adafruit_servokit)
+module and is left to the user to decide which **channel** to send signals to.
 
-### **vesc_twist_node**
+The bus and channel numbers are parameters that can be changed as needed by modifying the **adafruit_continuous_servo_calibration.yaml** file in the config directory.
 
-Associated file: **vesc_twist_node.py**
-
-Associated Topics:
-- Subscribes to [cmd_vel](#topics) 
-
-This node subscribes to the [cmd_vel](#topics) topic. This message structure is common throughout many packages in ROS and makes integrating them much easier. In the message, **linear.x** is for the forwards/backwards motion and **angular.z** is for the steering/yaw motion of the robot.
-The message must then be decoded to be compatible with the [**pyVesc**](#pyVesc) module.
 
 <div align="center">
 
@@ -124,20 +92,17 @@ The message must then be decoded to be compatible with the [**pyVesc**](#pyVesc)
 
 | Nodes |  Msg Type | Subscribed Topics | info |
 | ------ | ------ | ------ | ------ |
-| adafruit_steering_node | std_msgs.msg.Float32 | /steering | value range: [-1,1] |
-| adafruit_throttle_node | std_msgs.msg.Float32 | /throttle | value range: [-1,1] |
-| adafruit_servo_node    | std_msgs.msg.Float32 | /servo    | value range (degrees): [0,180] |
-| adafruit_twist_node    | geometry_msgs.msg.Twist | /cmd_vel | linear.x (forwards/backwards) angular.z (steering) ranges: [-1,1] |
-| vesc_steering_node     | std_msgs.msg.Float32 | /steering | value range: [-1,1] |
-| vesc_rpm_node          | std_msgs.msg.Float32 | /throttle | value range: [-1,1] |
 | vesc_twist_node        | geometry_msgs.msg.Twist | /cmd_vel | linear.x (forwards/backwards) angular.z (steering) ranges: [-1,1] |
+| adafruit_twist_node    | geometry_msgs.msg.Twist | /cmd_vel | linear.x (forwards/backwards) angular.z (steering) ranges: [-1,1] |
+| adafruit_servo_node    | std_msgs.msg.Float32 | /servo    | value range (degrees): [0,180] |
+| adafruit_continuous_servo_node | std_msgs.msg.Float32 | /continuous_servo | value range: [-1,1] |
 
+Publish messages from command line:
 
-`ros2 topic pub /stering std_msgs/msg/Float32 "{data: 0.0}"`
+- continuous_servo : `ros2 topic pub /continuous_servo std_msgs/msg/Float32 "{data: 0.0}"`
+- servo: `ros2 topic pub /servo std_msgs/msg/Float32 "{data: 90.0}"`
+- cmd_vel: `ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"`
 
-`ros2 topic pub /throttle std_msgs/msg/Float32 "{data: 0.0}"`
-
-`ros2 topic pub /servo std_msgs/msg/Float32 "{data: 90.0}"`
 
 <div align="center">
 
