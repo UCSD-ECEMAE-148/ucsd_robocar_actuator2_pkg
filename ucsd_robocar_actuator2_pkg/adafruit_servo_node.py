@@ -59,7 +59,7 @@ def main(args=None):
         adafruit_servo.destroy_node()
         rclpy.shutdown()
     except KeyboardInterrupt:
-        adafruit_servo.get_logger().info(f'Shutting down {NODE_NAME}...')
+        adafruit_servo.get_logger().info(f'Could not connect to Adafruit, Shutting down {NODE_NAME}...')
         adafruit_servo.destroy_node()
         rclpy.shutdown()
         adafruit_servo.get_logger().info(f'{NODE_NAME} shut down successfully.')
