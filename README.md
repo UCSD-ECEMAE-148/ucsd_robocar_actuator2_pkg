@@ -20,6 +20,8 @@
   - [**Launch**](#launch)
     - [vesc_twist](#vesc_twist)
     - [adafruit_twist](#adafruit_twist)
+    - [adafruit_servo](#adafruit_servo)
+    - [adafruit_continuous_servo](#adafruit_continuous_servo)
   - [**Troubleshooting**](#troubleshooting)
     - [Throttle and steering not working](#throttle-and-steering-not-working)
 
@@ -110,14 +112,13 @@ Publish messages from command line:
 
 </div>
 
+### **vesc_twist**
 
-### **adafruit**
+Associated file: **vesc_twist.launch.py**
 
-Associated file: **adafruit.launch.py**
+This file launches the [vesc_twist_node](#vesc_twist_node) node.
 
-This file launches both [adafruit_steering_node](#adafruit_steering_node) and [adafruit_throttle_node](#adafruit_throttle_node) nodes.
-
-`ros2 launch ucsd_robocar_actuator2_pkg adafruit.launch.py`
+`ros2 launch ucsd_robocar_actuator2_pkg vesc_twist.launch.py`
 
 ### **adafruit_twist**
 
@@ -127,21 +128,22 @@ This file launches the [adafruit_twist_node](#adafruit_twist_node) node.
 
 `ros2 launch ucsd_robocar_actuator2_pkg adafruit_twist.launch.py`
 
-### **vesc**
+### **adafruit_servo**
 
-Associated file: **vesc.launch.py**
+Associated file: **adafruit_servo.launch.py**
 
-This file launches both [vesc_steering_node](#vesc_steering_node) and [vesc_rpm_node](#vesc_rpm_node) nodes.
+This file launches the [adafruit_servo_node](#adafruit_servo_node) node.
 
-`ros2 launch ucsd_robocar_actuator2_pkg vesc.launch.py`
+`ros2 launch ucsd_robocar_actuator2_pkg adafruit_servo.launch.py`
 
-### **vesc_twist**
+### **adafruit_continuous_servo**
 
-Associated file: **vesc_twist.launch.py**
+Associated file: **adafruit_continuous_servo.launch.py**
 
-This file launches the [vesc_twist_node](#vesc_twist_node) node.
+This file launches the [adafruit_continuous_servo_node](#adafruit_continuous_servo_node) node.
 
-`ros2 launch ucsd_robocar_actuator2_pkg vesc_twist.launch.py`
+`ros2 launch ucsd_robocar_actuator2_pkg adafruit_continuous_servo.launch.py`
+
 
 ## **Troubleshooting**
 
