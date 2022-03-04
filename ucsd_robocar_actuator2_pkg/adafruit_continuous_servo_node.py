@@ -16,11 +16,11 @@ TOPIC_NAME = '/continuous_servo'
 class AdafruitContinuousServo(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.steering_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
+        self.continuous_servo_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.send_values_to_adafruit, 10)
         self.default_bus_num = int(1)
         self.default_continuous_servo_channel = int(4)
-        self.default_max_forward_limit = 1.0
-        self.default_max_reverse_limit = -1.0
+        self.default_max_forward_limit = 0.2
+        self.default_max_reverse_limit = -0.2
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -40,15 +40,21 @@ class AdafruitContinuousServo(Node):
         else:
             self.kit = ServoKit(channels=16)
 
-    def callback(self, data):
-        continuous_servo_throttle = data.data
-        if continuous_servo_throttle > self.max_forward:
-            continuous_servo_throttle = self.max_forward
-        elif continuous_servo_throttle < self.max_reverse:
-            continuous_servo_throttle = self.max_reverse
-        else:
-            pass
+    def send_values_to_adafruit(self, msg):
+        continuous_servo_throttle_raw = msg.data
+        continuous_servo_throttle = self.clamp(continuous_servo_throttle_raw, self.max_forward, self.max_reverse)
         self.kit.continuous_servo[self.continuous_servo_channel].throttle = continuous_servo_throttle
+
+    def clamp(self, data, upper_bound, lower_bound=None):
+        if lower_bound==None:
+            lower_bound = -upper_bound # making lower bound symmetric about zero
+        if data < lower_bound:
+            data_c = lower_bound
+        elif data > upper_bound:
+            data_c = upper_bound
+        else:
+            data_c = data
+        return data_c
 
 
 def main(args=None):

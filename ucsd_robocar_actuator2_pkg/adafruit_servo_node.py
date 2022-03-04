@@ -16,11 +16,11 @@ TOPIC_NAME = '/servo'
 class AdafruitServo(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.steering_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.callback, 10)
+        self.servo_subscriber = self.create_subscription(Float32, TOPIC_NAME, self.send_values_to_adafruit, 10)
         self.default_bus_num = int(1)
         self.default_servo_channel = int(3)
-        self.default_max_limit = 180
-        self.default_min_limit = 0
+        self.default_max_limit = 170
+        self.default_min_limit = 10
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -40,15 +40,21 @@ class AdafruitServo(Node):
         else:
             self.kit = ServoKit(channels=16)
 
-    def callback(self, data):
-        servo_angle = data.data
-        if servo_angle > self.max_limit:
-            servo_angle = self.max_limit
-        elif servo_angle < self.min_limit:
-            servo_angle = self.min_limit
-        else:
-            pass
+    def send_values_to_adafruit(self, msg):
+        servo_angle_raw = msg.data
+        servo_angle = self.clamp(servo_angle_raw, self.max_limit, self.min_limit)
         self.kit.servo[self.servo_channel].angle = servo_angle
+
+    def clamp(self, data, upper_bound, lower_bound=None):
+        if lower_bound==None:
+            lower_bound = -upper_bound # making lower bound symmetric about zero
+        if data < lower_bound:
+            data_c = lower_bound
+        elif data > upper_bound:
+            data_c = upper_bound
+        else:
+            data_c = data
+        return data_c
 
 
 def main(args=None):
