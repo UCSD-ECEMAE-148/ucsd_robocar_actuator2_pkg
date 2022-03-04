@@ -11,7 +11,7 @@ class VescTwist(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
         self.vesc = VESC_()
-        self.rpm_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.callback, 10)
+        self.twist_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.send_values_to_vesc, 10)
 
         # Default actuator values
         self.default_max_potential_rpm = int(10000) 
@@ -24,7 +24,7 @@ class VescTwist(Node):
         self.default_zero_throttle = int(0.0 * self.default_max_potential_rpm)
         self.default_min_throttle = int(-0.2 * self.default_max_potential_rpm)
 
-
+        # declaring ROS parameters
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -38,6 +38,8 @@ class VescTwist(Node):
                 ('zero_throttle', self.default_zero_throttle),
                 ('min_throttle', self.default_min_throttle)
             ])
+
+        # Get ROS parameters from config
         self.max_potential_rpm = int(self.get_parameter('max_potential_rpm').value)
         self.steering_polarity = int(self.get_parameter('steering_polarity').value)
         self.throttle_polarity = int(self.get_parameter('throttle_polarity').value)
@@ -51,7 +53,6 @@ class VescTwist(Node):
         self.max_rpm = int(self.get_parameter('max_throttle').value  * self.max_potential_rpm)
         self.min_rpm = int(self.get_parameter('min_throttle').value  * self.max_potential_rpm)
 
-
         self.get_logger().info(
             f'\nmax_rpm: {self.max_rpm}'
             f'\nsteering_polarity: {self.steering_polarity}'
@@ -64,8 +65,7 @@ class VescTwist(Node):
             f'\n(min_throttle, min_rpm): ({self.min_throttle}, {self.min_rpm})'
             )
 
-
-    def callback(self, msg):
+    def send_values_to_vesc(self, msg):
         # Steering map from [-1,1] --> [0,1]
         steering_angle_raw = float(self.steering_offset + self.remap(msg.angular.z))
         steering_angle = self.clamp(steering_angle_raw, self.max_right_steering_angle, self.max_left_steering_angle)
@@ -74,7 +74,7 @@ class VescTwist(Node):
         rpm_raw = int(self.max_rpm * msg.linear.x)
         rpm = self.clamp(rpm_raw, self.max_rpm, self.min_rpm)
 
-        # Send commands to VESC
+        # Send values to VESC
         self.vesc.send_rpm(int(self.throttle_polarity * rpm))
         self.vesc.send_servo_angle(float(self.steering_polarity * steering_angle))
 
@@ -96,8 +96,6 @@ class VescTwist(Node):
         else:
             data_c = data
         return data_c
-
-
 
 
 def main(args=None):
