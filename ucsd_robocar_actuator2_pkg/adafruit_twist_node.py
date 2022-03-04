@@ -11,7 +11,7 @@ TOPIC_NAME = '/cmd_vel'
 class AdafruitTwist(Node):
     def __init__(self):
         super().__init__(NODE_NAME)
-        self.rpm_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.callback, 10)
+        self.twist_subscriber = self.create_subscription(Twist, TOPIC_NAME, self.send_values_to_adafruit, 10)
 
         # Default board values
         self.default_bus_num = int(1)
@@ -72,16 +72,15 @@ class AdafruitTwist(Node):
             f'\nthrottle_channel: {self.throttle_channel}'
             f'\nsteering_polarity: {self.steering_polarity}'
             f'\nthrottle_polarity: {self.throttle_polarity}'
-            f'\nmax_right_steering: {self.max_right_steering}'
-            f'\nstraight_steering: {self.straight_steering}'
-            f'\nmax_left_steering: {self.max_left_steering}'
-            f'\nsteering_offset: {self.steering_offset}'
+            f'\n(max_right_steering, max_right_steering_angle): ({self.max_right_steering}, {self.max_right_steering_angle})'
+            f'\n(straight_steering, steering_offset): ({self.straight_steering}, {self.steering_offset})'
+            f'\n(max_left_steering, max_left_steering_angle): ({self.max_left_steering}, {self.max_left_steering_angle})'
             f'\nzero_throttle: {self.zero_throttle}'
             f'\nmax_throttle: {self.max_throttle}'
             f'\nmin_throttle: {self.min_throttle}'
             )
 
-    def callback(self, msg):
+    def send_values_to_adafruit(self, msg):
         # Steering map from [-1,1] --> [-90, 90] : [max_left,max_right] # to do: implement into calibration
         steering_angle_raw = float(self.steering_offset + self.remap(msg.angular.z))
         steering_angle = self.clamp(steering_angle_raw, self.max_right_steering_angle, self.max_left_steering_angle)
