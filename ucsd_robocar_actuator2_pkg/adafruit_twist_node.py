@@ -4,6 +4,7 @@ from geometry_msgs.msg import Twist
 from adafruit_servokit import ServoKit
 import board
 import busio
+import time
 
 NODE_NAME = 'adafruit_twist_node'
 TOPIC_NAME = '/cmd_vel'
@@ -119,10 +120,11 @@ def main(args=None):
         rclpy.shutdown()
     except:
         adafruit_twist.get_logger().info(f'Could not connect to Adafruit, Shutting down {NODE_NAME}...')
+        adafruit_twist.kit.continuous_servo[adafruit_twist.throttle_channel].throttle = adafruit_twist.throttle_polarity * adafruit_twist.zero_throttle
+        time.sleep(1)
         adafruit_twist.destroy_node()
         rclpy.shutdown()
         adafruit_twist.get_logger().info(f'{NODE_NAME} shut down successfully.')
-
 
 
 if __name__ == '__main__':
