@@ -20,6 +20,9 @@ class VescTwist(Node):
         self.default_max_right_steering = 0.8
         self.default_straight_steering = 0.4
         self.default_max_left_steering = 0.1
+        self.default_zero_throttle = 0.0
+        self.default_max_throttle = 0.34
+        self.default_min_throttle = 0.33
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -28,7 +31,10 @@ class VescTwist(Node):
                 ('throttle_polarity', self.default_throttle_polarity),
                 ('max_right_steering', self.default_max_right_steering),
                 ('straight_steering', self.default_straight_steering),
-                ('max_left_steering', self.default_max_left_steering)
+                ('max_left_steering', self.default_max_left_steering),
+                ('zero_throttle', self.default_zero_throttle),
+                ('max_throttle', self.default_max_throttle),
+                ('min_throttle', self.default_min_throttle)
             ])
         self.max_rpm = int(self.get_parameter('max_rpm').value)
         self.steering_polarity = int(self.get_parameter('steering_polarity').value)
@@ -36,6 +42,10 @@ class VescTwist(Node):
         self.max_right_steering = self.get_parameter('max_right_steering').value
         self.straight_steering = self.get_parameter('straight_steering').value
         self.max_left_steering = self.get_parameter('max_left_steering').value
+        self.zero_throttle = self.get_parameter('zero_throttle').value
+        self.max_throttle = self.get_parameter('max_throttle').value
+        self.min_throttle = self.get_parameter('min_throttle').value
+
         self.steering_offset = self.remap(self.straight_steering) - 0.5
 
         self.get_logger().info(
@@ -67,6 +77,17 @@ class VescTwist(Node):
         output_end = 1
         normalized_output = float(output_start + (value - input_start) * ((output_end - output_start) / (input_end - input_start)))
         return normalized_output
+    
+    def clamp(self, data, upper_bound, lower_bound=None):
+            if lower_bound==None:
+                lower_bound = -upper_bound # making lower bound symmetric about zero
+            if data < lower_bound:
+                data_c = lower_bound
+            elif data > upper_bound:
+                data_c = upper_bound
+            else:
+                data_c = data
+            return data_c 
 
 
 def main(args=None):
