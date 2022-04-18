@@ -20,9 +20,9 @@ class VescTwist(Node):
         self.default_max_right_steering = 0.8
         self.default_straight_steering = 0.4
         self.default_max_left_steering = 0.1
-        self.default_zero_throttle = 0.0
-        self.default_max_throttle = 0.34
-        self.default_min_throttle = 0.33
+        self.default_zero_throttle = -0.032
+        self.default_max_throttle = 0.382
+        self.default_min_throttle = 0.322
         self.declare_parameters(
             namespace='',
             parameters=[

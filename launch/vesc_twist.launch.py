@@ -15,16 +15,22 @@ def generate_launch_description():
     node_name = 'vesc_twist_node'
     calibration_file = 'ros_racer_calibration.yaml'
 
-    config = os.path.join(
-        get_package_share_directory(lane_detection2_package),
-        'config',
-        calibration_file)
+    # config = os.path.join(
+    #     get_package_share_directory(lane_detection2_package),
+    #     'config',
+    #     calibration_file)
+
+    # ld = LaunchDescription()
+    # vesc_twist_node = Node(
+    #     package=pkg,
+    #     executable=node_name,
+    #     output='screen',
+    #     parameters=[config])
 
     ld = LaunchDescription()
     vesc_twist_node = Node(
         package=pkg,
         executable=node_name,
-        output='screen',
-        parameters=[config])
+        output='screen')
     ld.add_action(vesc_twist_node)
     return ld
