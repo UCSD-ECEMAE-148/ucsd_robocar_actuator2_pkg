@@ -47,6 +47,8 @@ class VescTwist(Node):
         self.min_throttle = self.get_parameter('min_throttle').value
 
         self.steering_offset = self.remap(self.straight_steering) - 0.5
+        self.max_right_steering = self.remap(self.max_right_steering)
+        self.max_left_steering = self.remap(self.max_left_steering)
 
         self.get_logger().info(
             f'\nmax_rpm: {self.max_rpm}'
