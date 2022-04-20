@@ -18,7 +18,7 @@ class VescTwist(Node):
         self.default_steering_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
         self.default_throttle_polarity = int(1) # if polarity is flipped, switch from 1 --> -1
         self.default_max_right_steering = 0.8
-        self.default_straight_steering = 0.4
+        self.default_straight_steering = 0.5
         self.default_max_left_steering = 0.1
         self.default_zero_throttle = -0.032
         self.default_max_throttle = 0.382
@@ -45,10 +45,14 @@ class VescTwist(Node):
         self.zero_throttle = self.get_parameter('zero_throttle').value
         self.max_throttle = self.get_parameter('max_throttle').value
         self.min_throttle = self.get_parameter('min_throttle').value
-
-        self.steering_offset = self.remap(self.straight_steering) - 0.5
-        self.max_right_steering = self.remap(self.max_right_steering)
-        self.max_left_steering = self.remap(self.max_left_steering)
+        
+        # Remappings 
+        self.max_right_steering_angle = self.remap(self.max_right_steering)
+        self.steering_offset = self.remap(self.straight_steering) - self.default_straight_steering
+        self.max_left_steering_angle = self.remap(self.max_left_steering)
+        self.zero_rpm = int(self.zero_throttle * self.max_potential_rpm)
+        self.max_rpm = int(self.max_throttle  * self.max_potential_rpm)
+        self.min_rpm = int(self.min_throttle  * self.max_potential_rpm)
 
         self.get_logger().info(
             f'\nmax_rpm: {self.max_rpm}'
