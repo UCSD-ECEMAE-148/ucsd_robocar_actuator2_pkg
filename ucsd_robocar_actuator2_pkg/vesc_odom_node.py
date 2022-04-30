@@ -16,11 +16,29 @@ class VescOdom(Node):
         self.motor_rpm_publisher = self.create_publisher(Int32, PUBLISHER_TOPIC_NAME, 10)
         self.motor_rpm = Float32()
 
+        self.default_K_rpm = 1.5
+        self.default_K_rpm_offset = -125.88
+        self.default_K_v = 4921.82
+        self.default_K_v_offset = 93.59
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('K_rpm', self.default_K_rpm),
+                ('K_v', self.default_K_rpm),
+                ('K_rpm', self.default_K_v),
+                ('K_v_offset', self.default_K_v_offset)
+            ])
+        self.K_rpm = float(self.get_parameter('K_rpm').value)
+        self.K_rpm_offset = float(self.get_parameter('K_rpm_offset').value)
+
         # publish a message every 0.1 seconds
         self.timer_period = 1 / 30 
         self.timer = self.create_timer(self.timer_period, self.get_vesc_rpm)  # Create the timer
 
     def get_vesc_rpm(self):
+        motor_rpm_raw = int(self.vesc.get_rpm())
+        motor_rpm_est = self.K_rpm * motor_rpm_raw + self.K_rpm_offset
+
         self.motor_rpm.data = int(self.vesc.get_rpm())
         self.motor_rpm_publisher.publish()
 
