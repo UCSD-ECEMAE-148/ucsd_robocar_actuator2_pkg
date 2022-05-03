@@ -9,6 +9,10 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
+
+    original_topic_name = '/ackermann_cmd_out'
+    new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
+
     vesc_config = os.path.join(
         get_package_share_directory('ucsd_robocar_actuator2_pkg'),
         'config',
@@ -53,7 +57,7 @@ def generate_launch_description():
         executable='ackermann_mux',
         name='ackermann_mux',
         parameters=[LaunchConfiguration('mux_config')],
-        remappings=[('ackermann_cmd_out', 'ackermann_drive')]
+        remappings=[(original_topic_name, new_topic_name)]
     )
     ld.add_action(ackermann_to_vesc_node)
     ld.add_action(vesc_to_odom_node)

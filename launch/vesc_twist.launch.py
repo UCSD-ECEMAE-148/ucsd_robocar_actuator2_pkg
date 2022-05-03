@@ -20,12 +20,15 @@ def generate_launch_description():
         'config',
         calibration_file)
 
+    original_topic_name = '/cmd_vel'
+    new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
+
     ld = LaunchDescription()
     vesc_twist_node = Node(
         package=pkg,
         executable=node_name,
         output='screen',
+        remappings=[(original_topic_name,new_topic_name)],
         parameters=[config])
-
     ld.add_action(vesc_twist_node)
     return ld
