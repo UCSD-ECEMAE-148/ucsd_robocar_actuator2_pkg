@@ -9,24 +9,28 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
+    actuator_pkg = 'ucsd_robocar_actuator2_pkg'
 
     original_topic_name = '/ackermann_cmd_out'
     new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
 
     vesc_config = os.path.join(
-        get_package_share_directory('ucsd_robocar_actuator2_pkg'),
+        get_package_share_directory(actuator_pkg),
         'config',
         'vesc_odom.yaml'
     )
+    
     mux_config = os.path.join(
-        get_package_share_directory('ucsd_robocar_actuator2_pkg'),
+        get_package_share_directory(actuator_pkg),
         'config',
         'vesc_mux.yaml'
     )
+
     vesc_la = DeclareLaunchArgument(
         'vesc_config',
         default_value=vesc_config,
         description='Descriptions for vesc configs')
+
     mux_la = DeclareLaunchArgument(
         'mux_config',
         default_value=mux_config,
