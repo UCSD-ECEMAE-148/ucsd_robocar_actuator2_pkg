@@ -101,7 +101,8 @@ The bus and channel numbers are parameters that can be changed as needed by modi
 
 Examples of publishing messages from command line:
 
-- cmd_vel: `ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"`
+- ackerman_drive: `ros2 topic pub  -r 100 /teleop ackermann_msgs/msg/AckermannDriveStamped "drive: {steering_angle: 0.0, speed: 0.0}"`
+- cmd_vel: `ros2 topic pub -r 100 /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"`
 - servo: `ros2 topic pub /servo std_msgs/msg/Float32 "{data: 90.0}"`
 - continuous_servo : `ros2 topic pub /continuous_servo std_msgs/msg/Float32 "{data: 0.0}"`
 
