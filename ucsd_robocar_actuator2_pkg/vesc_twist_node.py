@@ -72,7 +72,7 @@ class VescTwist(Node):
         # RPM map from [-1,1] --> [-max_rpm,max_rpm]
         rpm = int(self.max_rpm * msg.linear.x)
 
-        self.get_logger().info(f'rpm: {rpm}, steering_angle: {steering_angle}')
+        # self.get_logger().info(f'rpm: {rpm}, steering_angle: {steering_angle}')
         self.vesc.send_rpm(int(self.throttle_polarity * rpm))
         self.vesc.send_servo_angle(float(self.steering_polarity * steering_angle))
 
