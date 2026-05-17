@@ -24,7 +24,11 @@ setup(
     maintainer_email='djnighti@ucsd.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
-    tests_require=['pytest'],
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'vesc_twist_node = ucsd_robocar_actuator2_pkg.vesc_twist_node:main',
